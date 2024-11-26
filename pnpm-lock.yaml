@@ -27,8 +27,8 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       yaml:
-        specifier: ^2.3.4
-        version: 2.3.4
+        specifier: ^2.6.1
+        version: 2.6.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -143,9 +143,10 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
 
-  yaml@2.3.4:
-    resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
+  yaml@2.6.1:
+    resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
+    hasBin: true
 
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
@@ -233,6 +234,6 @@ snapshots:
 
   uuid@8.3.2: {}
 
-  yaml@2.3.4: {}
+  yaml@2.6.1: {}
 
   zod@3.22.4: {}
