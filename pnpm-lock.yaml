@@ -34,8 +34,8 @@ importers:
         version: 3.22.4
     devDependencies:
       '@vercel/ncc':
-        specifier: ^0.38.1
-        version: 0.38.1
+        specifier: ^0.38.3
+        version: 0.38.3
       pnpm:
         specifier: ^8.14.3
         version: 8.14.3
@@ -64,8 +64,8 @@ packages:
   '@types/node@20.11.5':
     resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
 
-  '@vercel/ncc@0.38.1':
-    resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
+  '@vercel/ncc@0.38.3':
+    resolution: {integrity: sha512-rnK6hJBS6mwc+Bkab+PGPs9OiS0i/3kdTO+CkI8V0/VrW3vmz7O2Pxjw/owOlmo6PKEIxRSeZKv/kuL9itnpYA==}
     hasBin: true
 
   asynckit@0.4.0:
@@ -175,7 +175,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@vercel/ncc@0.38.1': {}
+  '@vercel/ncc@0.38.3': {}
 
   asynckit@0.4.0: {}
 
