@@ -37,8 +37,8 @@ importers:
         specifier: ^0.38.1
         version: 0.38.1
       pnpm:
-        specifier: ^10.5.0
-        version: 10.5.0
+        specifier: ^10.6.3
+        version: 10.6.3
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
@@ -121,8 +121,8 @@ packages:
     resolution: {integrity: sha512-1Y1A//QUXEZK7YKz+rD9WydcE1+EuPr6ZBgKecAB8tmoW6UFv0NREVJe1p+jRxtThkcbbKkfwIbWJe/IeE6m2Q==}
     engines: {node: '>=0.10.0'}
 
-  pnpm@10.5.0:
-    resolution: {integrity: sha512-ERBqWRbHQG/kuMuOMGeXS4co9HMIpPWsXoUDBK+m9X4oR9eVDf54h32NNr+0AdOBxCFds6TDVH/6Y8FDM6b6UQ==}
+  pnpm@10.6.3:
+    resolution: {integrity: sha512-u0XjTVCpp26FipWDcwG/tr1tNa6ixdUglPpJekZ8Q/XEQBA84lEengovicPWBxuqwzWPxorG+3XizrPSc2Bl5g==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -225,7 +225,7 @@ snapshots:
 
   parse-passwd@1.0.0: {}
 
-  pnpm@10.5.0: {}
+  pnpm@10.6.3: {}
 
   proxy-from-env@1.1.0: {}
 
