@@ -13,7 +13,7 @@
     "@types/node-fetch": "^2.6.11",
     "axios": "^1.8.4",
     "expand-tilde": "^2.0.2",
-    "yaml": "^2.3.4",
+    "yaml": "^2.7.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
