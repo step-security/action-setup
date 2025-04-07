@@ -40,8 +40,8 @@ importers:
         specifier: ^10.5.0
         version: 10.5.0
       typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
+        specifier: ^5.8.3
+        version: 5.8.3
 
 packages:
 
@@ -192,8 +192,8 @@ packages:
     resolution: {integrity: sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==}
     engines: {node: '>=0.6.11 <=0.7.0 || >=0.7.3'}
 
-  typescript@5.3.3:
-    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -357,7 +357,7 @@ snapshots:
 
   tunnel@0.0.6: {}
 
-  typescript@5.3.3: {}
+  typescript@5.8.3: {}
 
   undici-types@5.26.5: {}
 
