@@ -1,7 +1,7 @@
 name: Auto Cherry-Pick from Upstream
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       original-owner:
         description: "Owner of the original repository"
@@ -440,6 +440,7 @@ jobs:
         run: |
           npm install -g pnpm
           pnpm --version
+          pnpm install --frozen-lockfile
 
       - name: Install specific Yarn version if defined
         if: ${{ inputs.package_manager == 'yarn' && inputs.yarn_version != '' }}
