@@ -466,21 +466,11 @@ jobs:
       - name: Install dependencies
         if: env.action_type == 'node' && env.CHANGES == 'true'
         run: |
-          case "${{ inputs.package_manager }}" in
-            npm)
-              npm ci
-              ;;
-            yarn)
-              yarn install --frozen-lockfile
-              ;;
-            pnpm)
-              pnpm install --frozen-lockfile
-              ;;
-            *)
-              echo "❌ Unknown package manager: ${{ inputs.package_manager }}"
-              exit 1
-              ;;
-          esac
+          if [ "${{ inputs.package_manager }}" == "npm" ]; then
+            npm ci
+          else
+            yarn install --frozen-lockfile
+          fi
 
       - name: Run Specified Build Script and Commit Changes via gh CLI
         if: env.action_type == 'node' && env.CHANGES == 'true'
