@@ -40,7 +40,7 @@ If `run_install` is a YAML string representation of either an object or an array
 
 ### `package_json_file`
 
-**Optional** (_type:_ `string`, _default:_ `package.json`) File path to the `package.json` to read "packageManager" configuration.
+**Optional** (_type:_ `string`, _default:_ `package.json`) File path to the `package.json`/[`package.yaml`](https://github.com/pnpm/pnpm/pull/1799) to read "packageManager" configuration.
 
 ### `standalone`
 
@@ -76,7 +76,7 @@ jobs:
     steps:
       - uses: step-security/action-setup@v4
         with:
-          version: 9
+          version: 10
 ```
 
 ###  Install only pnpm with `packageManager`
@@ -112,7 +112,7 @@ jobs:
 
       - uses: step-security/action-setup@v4
         with:
-          version: 9
+          version: 10
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
@@ -137,7 +137,7 @@ jobs:
       - uses: step-security/action-setup@v4
         name: Install pnpm
         with:
-          version: 9
+          version: 10
           run_install: false
 
       - name: Install Node.js
