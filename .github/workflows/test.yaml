@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         pnpm:
-          - 4.11.1
+          - 9.15.5
         os:
           - ubuntu-latest
           - macos-latest
@@ -32,7 +32,7 @@ jobs:
       - name: Run the action
         uses: ./
         with:
-          version: 4.11.1
+          version: 9.15.5
 
       - name: 'Test: which'
         run: which pnpm; which pnpx
@@ -49,7 +49,7 @@ jobs:
       fail-fast: false
       matrix:
         pnpm:
-          - 4.11.1
+          - 9.15.5
         os:
           - ubuntu-latest
           - macos-latest
@@ -66,7 +66,7 @@ jobs:
       - name: Run the action
         uses: ./
         with:
-          version: 4.11.1
+          version: 9.15.5
           dest: ~/test/pnpm
 
       - name: 'Test: which'
@@ -144,7 +144,7 @@ jobs:
       fail-fast: false
       matrix:
         pnpm:
-          - 4.11.1
+          - 9.15.5
         os:
           - ubuntu-latest
           - macos-latest
@@ -164,7 +164,6 @@ jobs:
                 - --global-dir=./pnpm-global
                 - npm
                 - yarn
-                - pnpm
           - name: 'array'
             value: |
               - {}
@@ -174,7 +173,6 @@ jobs:
                 - --global-dir=./pnpm-global
                 - npm
                 - yarn
-                - pnpm
 
     steps:
       - name: Harden Runner
@@ -187,7 +185,7 @@ jobs:
       - name: Run the action
         uses: ./
         with:
-          version: 4.11.1
+          version: 9.15.5
           run_install: ${{ matrix.run_install.value }}
 
       - name: 'Test: which'
