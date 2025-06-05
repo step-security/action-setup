@@ -1,0 +1,3 @@
+[[IgnoredVulns]]
+id = "GHSA-cxrh-j4jr-qwg3"
+reason = "Undici not used, no webhook calls"
