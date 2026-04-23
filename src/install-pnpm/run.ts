@@ -6,7 +6,7 @@ import path from 'path'
 import { execPath } from 'process'
 import util from 'util'
 import { Inputs } from '../inputs'
-import YAML from 'yaml'
+import { parse as parseYaml } from 'yaml'
 
 export async function runSelfInstaller(inputs: Inputs): Promise<number> {
   const { version, dest, packageJsonFile, standalone } = inputs
@@ -63,7 +63,7 @@ async function readTarget(opts: {
     try {
       const content = readFileSync(path.join(GITHUB_WORKSPACE, packageJsonFile), 'utf8');
       ({ packageManager } = packageJsonFile.endsWith(".yaml")
-        ? YAML.parse(content, { merge: true })
+        ? parseYaml(content, { merge: true })
         : JSON.parse(content)
       )
     } catch (error: unknown) {
