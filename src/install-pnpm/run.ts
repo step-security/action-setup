@@ -34,23 +34,33 @@ export async function runSelfInstaller(inputs: Inputs): Promise<number> {
     return npmExitCode
   }
 
-  const pnpmHome = path.join(dest, 'node_modules', '.bin')
-  addPath(pnpmHome)
+  // On Windows with standalone mode, npm's .bin shims can't properly
+  // execute the extensionless @pnpm/exe native binaries. Add the
+  // @pnpm/exe directory directly to PATH so pnpm.exe is found natively.
+  const pnpmHome = standalone && process.platform === 'win32'
+    ? path.join(dest, 'node_modules', '@pnpm', 'exe')
+    : path.join(dest, 'node_modules', '.bin')
+  // pnpm expects PNPM_HOME/bin in PATH for global binaries (e.g. node
+  // installed via `pnpm runtime`). Add it first so the next addPath
+  // (pnpmHome itself, which contains pnpm.exe) has higher precedence.
   addPath(path.join(pnpmHome, 'bin'))
+  addPath(pnpmHome)
   exportVariable('PNPM_HOME', pnpmHome)
 
   // Ensure pnpm bin link exists — npm ci sometimes doesn't create it
-  const pnpmBinLink = path.join(pnpmHome, 'pnpm')
-  if (!existsSync(pnpmBinLink)) {
-    await mkdir(pnpmHome, { recursive: true })
-    const target = standalone
-      ? path.join('..', '@pnpm', 'exe', 'pnpm')
-      : path.join('..', 'pnpm', 'bin', 'pnpm.mjs')
-    await symlink(target, pnpmBinLink)
+  if (process.platform !== 'win32') {
+    const pnpmBinLink = path.join(dest, 'node_modules', '.bin', 'pnpm')
+    if (!existsSync(pnpmBinLink)) {
+      await mkdir(path.join(dest, 'node_modules', '.bin'), { recursive: true })
+      const target = standalone
+        ? path.join('..', '@pnpm', 'exe', 'pnpm')
+        : path.join('..', 'pnpm', 'bin', 'pnpm.mjs')
+      await symlink(target, pnpmBinLink)
+    }
   }
 
   const bootstrapPnpm = standalone
-    ? path.join(dest, 'node_modules', '@pnpm', 'exe', 'pnpm')
+    ? path.join(dest, 'node_modules', '@pnpm', 'exe', process.platform === 'win32' ? 'pnpm.exe' : 'pnpm')
     : path.join(dest, 'node_modules', 'pnpm', 'bin', 'pnpm.mjs')
 
   // Determine the target version
