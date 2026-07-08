@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "mode": "derivative",
+  "upstream": "pnpm/action-setup",
+  "release_version_type": "vx.x.x",
+  "action_type": "node",
+  "vendor_series_version": "2026.06.1",
+  "last_success": {
+    "upstream_tag": "v6.0.0",
+    "imported_at": "2026-07-08T12:00:57.060Z"
+  },
+  "last_attempt": {
+    "upstream_tag": "v6.0.0",
+    "status": "success",
+    "reason": "ok",
+    "at": "2026-07-08T12:00:57.060Z"
+  },
+  "tier": "A",
+  "policy": {
+    "stepwise_imports": true,
+    "skip_dist_from_upstream": true
+  }
+}

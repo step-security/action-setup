@@ -1,5 +1,9 @@
 [![StepSecurity Maintained Action](https://raw.githubusercontent.com/step-security/maintained-actions-assets/main/assets/maintained-action-banner.png)](https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions)
 
+> ## :warning: Upgrade from v2!
+>
+> The v2 version of this action [has stopped working](https://github.com/step-security/action-setup/issues/135) with newer Node.js versions. Please, upgrade to the latest version to fix any issues.
+
 # Setup pnpm
 
 Install pnpm package manager.
@@ -12,7 +16,7 @@ Version of pnpm to install.
 
 **Optional** when there is a [`packageManager` field in the `package.json`](https://nodejs.org/api/corepack.html).
 
-otherwise, this field is **required** It supports npm versioning scheme, it could be an exact version (such as `6.24.1`), or a version range (such as `6`, `6.x.x`, `6.24.x`, `^6.24.1`, `*`, etc.), or `latest`.
+otherwise, this field is **required** It supports npm versioning scheme, it could be an exact version (such as `10.9.8`), or a version range (such as `10`, `10.x.x`, `10.9.x`, `^10.9.8`, `*`, etc.), or `latest`.
 
 ### `dest`
 
@@ -84,7 +88,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         with:
           version: 10
 ```
@@ -103,7 +107,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
 ```
 
 ### Install pnpm and a few npm packages
@@ -118,9 +122,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         with:
           version: 10
           run_install: |
@@ -142,9 +146,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         name: Install pnpm
         with:
           version: 10
@@ -159,3 +163,7 @@ jobs:
 ## Notes
 
 This action does not setup Node.js for you, use [actions/setup-node](https://github.com/actions/setup-node) yourself.
+
+## License
+
+[MIT](https://github.com/step-security/action-setup/blob/master/LICENSE.md) © [Hoàng Văn Khải](https://github.com/KSXGitHub/)

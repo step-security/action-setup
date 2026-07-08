@@ -26,8 +26,7 @@ jobs:
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
-
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Run the action
         uses: ./
@@ -37,8 +36,23 @@ jobs:
       - name: 'Test: which'
         run: which pnpm; which pnpx
 
-      - name: 'Test: install'
-        run: pnpm install
+      - name: 'Test: version'
+        run: |
+          actual="$(pnpm --version)"
+          echo "pnpm version: ${actual}"
+          if [[ ! "${actual}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-.+)?$ ]]; then
+            echo "ERROR: pnpm --version did not produce valid output"
+            exit 1
+          fi
+        shell: bash
+
+      - name: 'Test: install in a fresh project'
+        run: |
+          mkdir /tmp/test-project
+          cd /tmp/test-project
+          pnpm init
+          pnpm add is-odd
+        shell: bash
 
   test_dest:
     name: Test with dest
@@ -60,8 +74,7 @@ jobs:
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
-
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Run the action
         uses: ./
@@ -72,8 +85,15 @@ jobs:
       - name: 'Test: which'
         run: which pnpm && which pnpx
 
-      - name: 'Test: install'
-        run: pnpm install
+      - name: 'Test: version'
+        run: |
+          actual="$(pnpm --version)"
+          echo "pnpm version: ${actual}"
+          if [[ ! "${actual}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-.+)?$ ]]; then
+            echo "ERROR: pnpm --version did not produce valid output"
+            exit 1
+          fi
+        shell: bash
 
   test_standalone:
     name: Test with standalone
@@ -85,55 +105,96 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
           - windows-latest
-
-        standalone:
-          - true
-          - false
 
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
-
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Run the action
         uses: ./
         with:
-          version: 7.0.0
-          standalone: ${{ matrix.standalone }}
+          version: 9.15.0
+          standalone: true
 
-      - name: install Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
-        with:
-          # pnpm@7.0.0 is not compatible with Node.js 12
-          node-version: 20
-
-      - name: 'Test: which (pnpm)'
+      - name: 'Test: which'
         run: which pnpm
 
-      - name: 'Test: which (pnpx)'
-        if: matrix.standalone == false
-        run: which pnpx
-
-      - name: 'Test: install when standalone is true'
-        if: matrix.standalone
-        run: pnpm install
-
-      - name: 'Test: install when standalone is false'
-        if: matrix.standalone == false
-        # Since the default shell on windows runner is pwsh, we specify bash explicitly
-        shell: bash
+      - name: 'Test: version'
         run: |
-          if pnpm install; then
-            echo "pnpm install should fail"
+          actual="$(pnpm --version)"
+          echo "pnpm version: ${actual}"
+          if [[ ! "${actual}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-.+)?$ ]]; then
+            echo "ERROR: pnpm --version did not produce valid output"
             exit 1
-          else
-            echo "pnpm install failed as expected"
           fi
+        shell: bash
+
+      - name: 'Test: install in a fresh project'
+        run: |
+          mkdir /tmp/test-standalone
+          cd /tmp/test-standalone
+          pnpm init
+          pnpm add is-odd
+        shell: bash
+
+  test_dev_engines:
+    name: Test with devEngines.packageManager
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        version:
+          - '9.15.5'
+          - '>=9.15.0'
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
+        with:
+          egress-policy: audit
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Set up package.json with devEngines.packageManager
+        run: echo '{"devEngines":{"packageManager":{"name":"pnpm","version":"${{
+          matrix.version }}","onFail":"download"}}}' > package.json
+        shell: bash
+
+      - name: Run the action
+        uses: ./
+
+      - name: 'Test: which'
+        run: which pnpm; which pnpx
+
+      - name: 'Test: version'
+        run: |
+          set -e
+          required='${{ matrix.version }}'
+          actual="$(pnpm --version)"
+          echo "pnpm version: ${actual}"
+
+          if [ "${required}" = ">=9.15.0" ]; then
+            min="9.15.0"
+            if [ "$(printf '%s\n' "${min}" "${actual}" | sort -V | head -n1)" != "${min}" ]; then
+              echo "Expected pnpm version >= ${min}, but got ${actual}"
+              exit 1
+            fi
+          else
+            if [ "${actual}" != "${required}" ]; then
+              echo "Expected pnpm version ${required}, but got ${actual}"
+              exit 1
+            fi
+          fi
+        shell: bash
 
   test_run_install:
     name: 'Test with run_install (${{ matrix.run_install.name }}, ${{ matrix.os }})'
@@ -152,23 +213,9 @@ jobs:
         run_install:
           - name: 'null'
             value: 'null'
-          - name: 'empty object'
-            value: '{}'
-          - name: 'recursive'
-            value: |
-              recursive: true
           - name: 'global'
             value: |
               args:
-                - --global
-                - --global-dir=./pnpm-global
-                - npm
-                - yarn
-          - name: 'array'
-            value: |
-              - {}
-              - recursive: true
-              - args:
                 - --global
                 - --global-dir=./pnpm-global
                 - npm
@@ -179,8 +226,7 @@ jobs:
         uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit
-
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Run the action
         uses: ./
@@ -191,5 +237,12 @@ jobs:
       - name: 'Test: which'
         run: which pnpm; which pnpx
 
-      - name: 'Test: install'
-        run: pnpm install
+      - name: 'Test: version'
+        run: |
+          actual="$(pnpm --version)"
+          echo "pnpm version: ${actual}"
+          if [[ ! "${actual}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-.+)?$ ]]; then
+            echo "ERROR: pnpm --version did not produce valid output"
+            exit 1
+          fi
+        shell: bash
