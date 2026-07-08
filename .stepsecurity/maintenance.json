@@ -6,14 +6,14 @@
   "action_type": "node",
   "vendor_series_version": "2026.06.1",
   "last_success": {
-    "upstream_tag": "v6.0.2",
-    "imported_at": "2026-07-08T12:01:04.783Z"
+    "upstream_tag": "v6.0.3",
+    "imported_at": "2026-07-08T12:01:08.613Z"
   },
   "last_attempt": {
-    "upstream_tag": "v6.0.2",
+    "upstream_tag": "v6.0.3",
     "status": "success",
     "reason": "ok",
-    "at": "2026-07-08T12:01:04.783Z"
+    "at": "2026-07-08T12:01:08.613Z"
   },
   "tier": "A",
   "policy": {
