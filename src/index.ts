@@ -10,16 +10,16 @@ import { validateSubscription } from "./stepsecurity/subscription-check";
 
 async function main() {
     await validateSubscription();
-  const inputs = getInputs()
-
   if (getState('is_post') === 'true') {
-    await runPost(inputs)
+    await runPost()
   } else {
-    await runMain(inputs)
+    await runMain()
   }
 }
 
-async function runMain(inputs: Inputs) {
+async function runMain() {
+  const inputs = getInputs()
+  saveState('inputs', inputs)
   saveState('is_post', 'true')
 
   const binDest = await installPnpm(inputs)
@@ -32,7 +32,8 @@ async function runMain(inputs: Inputs) {
   pnpmInstall(inputs)
 }
 
-async function runPost(inputs: Inputs) {
+async function runPost() {
+  const inputs = JSON.parse(getState('inputs')) as Inputs
   pruneStore(inputs)
   await saveCache(inputs)
 }
