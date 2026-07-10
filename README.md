@@ -1,9 +1,5 @@
 [![StepSecurity Maintained Action](https://raw.githubusercontent.com/step-security/maintained-actions-assets/main/assets/maintained-action-banner.png)](https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions)
 
-> ## :warning: Upgrade from v2!
->
-> The v2 version of this action [has stopped working](https://github.com/step-security/action-setup/issues/135) with newer Node.js versions. Please, upgrade to the latest version to fix any issues.
-
 # Setup pnpm
 
 Install pnpm package manager.
