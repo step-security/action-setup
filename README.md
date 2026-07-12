@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         with:
           version: 10
 ```
@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
 ```
 
 ### Install pnpm and a few npm packages
@@ -120,7 +120,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         with:
           version: 10
           run_install: |
@@ -144,7 +144,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: step-security/action-setup@v4
+      - uses: step-security/action-setup@v6
         name: Install pnpm
         with:
           version: 10
