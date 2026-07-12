@@ -2,6 +2,3 @@ packages:
   - '.'
 allowBuilds:
   esbuild: true
-overrides:
-  fast-xml-parser: '>=5.2.6'
-  fast-xml-builder: '>=1.2.1'
