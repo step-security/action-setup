@@ -1,5 +1,12 @@
 [![StepSecurity Maintained Action](https://raw.githubusercontent.com/step-security/maintained-actions-assets/main/assets/maintained-action-banner.png)](https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions)
 
+> [!IMPORTANT]
+> **This action has a successor: [`pnpm/setup`](https://github.com/pnpm/setup).**
+>
+> For pnpm v11 and newer, use [`pnpm/setup`](https://github.com/pnpm/setup) instead. It downloads pnpm's self-contained release binary (no Node.js or npm required) and can install a JavaScript runtime (Node.js, Bun, or Deno) in the same step, replacing `actions/setup-node`.
+>
+> `step-security/action-setup` remains the action to use for installing pnpm v10 and older. See [Migrating to pnpm/setup](#migrating-to-pnpmsetup) below.
+
 # Setup pnpm
 
 Install pnpm package manager.
@@ -10,7 +17,7 @@ Install pnpm package manager.
 
 Version of pnpm to install.
 
-**Optional** when there is a [`packageManager` field in the `package.json`](https://nodejs.org/api/corepack.html).
+**Optional** when there is a [`packageManager` or `devEngines.packageManager` field in the `package.json`](https://nodejs.org/api/corepack.html).
 
 otherwise, this field is **required** It supports npm versioning scheme, it could be an exact version (such as `10.9.8`), or a version range (such as `10`, `10.x.x`, `10.9.x`, `^10.9.8`, `*`, etc.), or `latest`.
 
@@ -50,7 +57,7 @@ If `run_install` is a YAML string representation of either an object or an array
 
 ### `package_json_file`
 
-**Optional** (_type:_ `string`, _default:_ `package.json`) File path to the `package.json`/[`package.yaml`](https://github.com/pnpm/pnpm/pull/1799) to read "packageManager" configuration.
+**Optional** (_type:_ `string`, _default:_ `package.json`) File path to the `package.json`/[`package.yaml`](https://github.com/pnpm/pnpm/pull/1799) to read `packageManager` or `devEngines.packageManager` configuration.
 
 ### `standalone`
 
@@ -72,7 +79,7 @@ Location of `pnpm` and `pnpx` command.
 
 ### Install only pnpm without `packageManager`
 
-This works when the repo either doesn't have a `package.json` or has a `package.json` but it doesn't specify `packageManager`.
+This works when the repo either doesn't have a `package.json` or has a `package.json` but it doesn't specify `packageManager` or `devEngines.packageManager`.
 
 ```yaml
 on:
@@ -91,7 +98,7 @@ jobs:
 
 ###  Install only pnpm with `packageManager`
 
-Omit `version` input to use the version in the [`packageManager` field in the `package.json`](https://nodejs.org/api/corepack.html).
+Omit `version` input to use the version in the [`packageManager` or `devEngines.packageManager` field in the `package.json`](https://nodejs.org/api/corepack.html).
 
 ```yaml
 on:
@@ -182,4 +189,4 @@ jobs:
 
 ## Notes
 
-This action does not setup Node.js for you, use [actions/setup-node](https://github.com/actions/setup-node) yourself.
+This action does not set up Node.js. Use [actions/setup-node](https://github.com/actions/setup-node) yourself. If you are on pnpm v11 or newer, [`pnpm/setup`](https://github.com/pnpm/setup) can install pnpm and Node.js in a single step.
