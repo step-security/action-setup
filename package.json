@@ -4,7 +4,8 @@
     "build:bundle": "esbuild src/index.ts --bundle --platform=node --target=node24 --format=cjs --minify --outfile=dist/index.js --loader:.json=json",
     "build": "pnpm run build:bundle",
     "start": "pnpm run build && sh ./run.sh",
-    "update-bootstrap": "node scripts/update-bootstrap.mjs"
+    "update-bootstrap": "node scripts/update-bootstrap.mjs",
+    "test": "node --experimental-test-module-mocks --test test/*.test.mjs"
   },
   "dependencies": {
     "@actions/cache": "^5.0.0",
@@ -23,5 +24,20 @@
     "@types/semver": "^7.8.0",
     "esbuild": "^0.28.1",
     "typescript": "^5.3.3"
+  },
+  "name": "@step-security/action-setup",
+  "author": "step-security",
+  "publisher": "step-security",
+  "homepage": "https://github.com/step-security/action-setup#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/step-security/action-setup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/step-security/action-setup/issues"
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10"
   }
 }
