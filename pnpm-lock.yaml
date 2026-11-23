@@ -20,12 +20,6 @@ importers:
       '@actions/glob':
         specifier: ^0.5.0
         version: 0.5.1
-      '@types/expand-tilde':
-        specifier: ^2.0.2
-        version: 2.0.2
-      '@types/node':
-        specifier: ^22.0.0
-        version: 22.20.1
       axios:
         specifier: ^1.20.0
         version: 1.20.0(debug@4.4.3)
@@ -42,6 +36,12 @@ importers:
         specifier: ^3.22.4
         version: 3.25.76
     devDependencies:
+      '@types/expand-tilde':
+        specifier: ^2.0.2
+        version: 2.0.2
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
       '@types/semver':
         specifier: ^7.8.0
         version: 7.8.0
