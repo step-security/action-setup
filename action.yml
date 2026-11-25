@@ -1,4 +1,5 @@
 name: Setup pnpm
+author: step-security
 description: Install pnpm package manager
 branding:
   icon: package
